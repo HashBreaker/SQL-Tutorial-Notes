@@ -580,4 +580,61 @@ FROM student
 WHERE major IN ('Biology', 'Chemistry') AND student_id > 2;
 ```
 
+### COMPANY DATABASE :
 
+![Screenshot (7)](https://user-images.githubusercontent.com/67586773/157910765-f13d311b-2f66-4f60-b475-0f0e65749f19.png)
+
+* Employee Table - 
+
+```sql
+CREATE TABLE employee (
+	emp_id INT PRIMARY KEY,
+	first_name VARCHAR(40),
+	last_name VARCHAR(40),
+	bith_day DATE,
+	sex VARCHAR(1),
+	salary INT,
+	super_id INT,
+	branch_id INT
+);
+```
+
+* Branch Table - 
+
+```sql
+CREATE TABLE branch (
+	branch_id INT PRIMARY KEY,
+	branch_name VARCHAR(40),
+	mgr_id INT,
+	mgr_start_date DATE, 
+	FOREIGN KEY(mgr_id) REFERENCES employee(emp_id) ON DELETE SET NULL 
+);
+```
+* Client Table - 
+
+```sql
+CREATE TABLE client (
+	client_id INT PRIMARY KEY,
+	client_name VARCHAR (40),
+	branch_id VARCHAR(40)
+);
+```
+
+* Works_With Table - 
+
+```sql
+CREATE TABLE works_with (
+	emp_id INT,
+	client_id INT,
+	total_sales INT
+);
+```
+* Branch Supplier Table - 
+
+```sql
+CREATE TABLE branch_supplier (
+	branch_id INT,
+	supplier_name VARCHAR(40),
+	supply_type VARCHAR(40)
+);
+```
