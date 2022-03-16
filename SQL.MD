@@ -32,17 +32,6 @@ SQL tutorial for beginners from freecodecamp YT.
 - CRUD (CREATE, READ/RETRIEVE, UPDATE, DELETE) is use to perform following functionalities - to create a database, read or retrieve informations from database, update the existing information database and delete the information in database.
 - These are core 4 operations or functionalities in DBMS.
 
-# SELECT
-
-- The ***SELECT statement*** is used to ***select*** data from a database.
-- Syntax:  SELECT column_name's or * FROM table_name;
-
-1. Suppose you want to grab name information from table:
-
-```sql
-SELECT name
-FROM student;
-```
 ## Two Types of Databases
 
 1. Relational databases (SQL)
