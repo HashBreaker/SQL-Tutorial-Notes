@@ -599,23 +599,40 @@ CREATE TABLE branch (
 	FOREIGN KEY(mgr_id) REFERENCES employee(emp_id) ON DELETE SET NULL 
 );
 ```
+* As we need to set the super_id and branch_id of the employee table as Foreign key in the employee table &  branch table and employee have not been created yet. We can achieve it by following queries
+
+```sql
+ALTER TABLE employee
+ADD FOREIGN KEY(branch_id)
+REFERENCES branch(branch_id)
+ON DELETE SET NULL;
+
+ALTER TABLE employee
+ADD FOREIGN KEY(super_id),
+REFERENCES employee(emp_id)
+ON DELETE SET NULL; 
+```
+
+
 * Client Table - 
 
 ```sql
 CREATE TABLE client (
 	client_id INT PRIMARY KEY,
 	client_name VARCHAR (40),
-	branch_id VARCHAR(40)
+	branch_id VARCHAR(40),
+  FOREIGN KEY (branch_id) REFERENCES branch(branch_id) ON DELETE SET NULL;
 );
 ```
 
 * Works_With Table - 
 
 ```sql
-CREATE TABLE works_with (
-	emp_id INT,
-	client_id INT,
-	total_sales INT
+CREATE TABLE client (
+	client_id INT PRIMARY KEY,
+	client_name VARCHAR (40),
+	branch_id VARCHAR(40),
+  FOREIGN KEY (branch_id) REFERENCES branch(branch_id) ON DELETE SET NULL;
 );
 ```
 * Branch Supplier Table - 
@@ -624,6 +641,8 @@ CREATE TABLE works_with (
 CREATE TABLE branch_supplier (
 	branch_id INT,
 	supplier_name VARCHAR(40),
-	supply_type VARCHAR(40)
+	supply_type VARCHAR(40),
+  FOREIGN KEY(branch_id, supplier_name), // supplier_name is not foreign key but it is composite key
+  FOREIGN KEY (branch_id) REFERENCES branch(branch_id) ON DELETE CASCADE;
 );
 ```
