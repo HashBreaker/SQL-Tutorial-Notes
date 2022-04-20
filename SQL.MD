@@ -896,3 +896,50 @@ SELECT COUNT(total_sales), client_id
 FROM works_with
 GROUP BY client_id;
 ```
+### Wildcards
+- - A wildcard character is used to substitute one or more characters in a string.
+- Wildcard characters are used with the `LIKE` operator is used in a `WHERE` clause to search for a specified pattern in a column.
+
+
+```sql
+-- % = any # characters,
+-- _ = one character
+```
+
+```sql
+-- Find any cleint's who are an LLC
+SELECT *
+FROM client
+WHERE client_name LIKE '%LLC';
+```
+
+```sql
+-- Find any branch suppliers who are in the label busines
+
+SELECT *
+FROM branch_supplier
+WHERE supplier_name LIKE '% Label%;
+```
+
+```sql
+-- Find any employee born in october
+
+SELECT * 
+FROM employee
+WHERE birth_date LIKE '____-10'; // YEAR-10
+
+-- Find any employee born in october
+
+SELECT *
+FROM employee
+WHERE birth_date LIKE '____-02';
+```
+
+```sql
+
+--- Find any clients who are schools :
+
+SELECT *
+FROM employee
+WHERE client_name LIKE '%school%';
+```
