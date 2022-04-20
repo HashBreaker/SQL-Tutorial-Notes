@@ -763,3 +763,69 @@ Select * from works_with;
 -- Branch Supplier table
 Select * from branch_supplier; 
 ```
+###  More Basic Queries 
+
+```sql
+-- Find all employees
+
+SELECT * FROM EMPLOYEE;
+
+-- Find all clients
+
+SELECT * FROM client;
+```
+
+-- Find all employees order by salary
+
+```sql
+SELECT * 
+FROM employee
+ORDER BY salary;
+
+
+-- Find all employees order by salary in descending order
+
+SELECT * 
+FROM employee
+ORDER BY salary desc;
+```
+
+```SQL
+-- Find all employee ordered by sex then name
+
+SELECT *
+FROM employee
+ORDER BY sex, first_name, last_name;
+```
+
+```sql
+-- Find first 5 employee in the table
+
+SELECT * 
+FROM employee 
+LIMIT 5;
+```
+
+```sql
+--- Find the first and last names of all employees
+
+SELECT first_name, last_name 
+FROM employee;
+
+--- Find the forename and surnames of all employees
+
+SELECT first_name AS forename, last_name AS surname
+FROM employee;
+```
+
+```sql
+-- Find out all different genders
+
+SELECT DISTINCT sex
+FROM employee;
+
+-- Find out all different branches
+
+SELECT DISTINCT branch_id
+FROM employee;
+```
