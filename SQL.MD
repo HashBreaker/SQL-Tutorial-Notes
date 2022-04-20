@@ -829,3 +829,70 @@ FROM employee;
 SELECT DISTINCT branch_id
 FROM employee;
 ```
+### Function
+
+* COUNT
+
+```sql
+-- Find the number of employee
+
+SELECT COUNT(emp_id) 
+FROM employee;     // output as 9 (It also counts null)
+
+// or
+SELECT COUNT(super_id)
+FROM empoyee;      // output as 8 (It won't count null)
+```
+
+```sql
+-- Find the number of female employees born after 1970
+
+SELECT COUNT(emp_id)
+FROM employee
+WHERE sex = 'F' AND birth_date > '1971-01-01';
+```
+
+* AVG
+
+```sql
+-- Find the average of all employee's salary
+
+SELECT AVG(salary)
+FROM employee;
+
+-- Find the average of Male's salary
+
+SELECT AVG(salary)
+FROM employee
+WHERE sex = 'M';
+
+-- Find the sum of all employee's salary
+
+SELECT SUM(salary)
+FROM employee;
+```
+
+* Aggregation (GROUP BY)
+
+```sql
+-- Find out how many males and females there are
+
+	SELECT COUNT(sex), sex
+	FROM employee
+	GROUP BY sex;
+```
+
+```sql
+-- Find the total sales of each salesman
+
+SELECT SUM(total_sales), emp_id
+FROM works_with
+GROUP BY emp_id;
+
+
+-- Find the total money spent by each client
+
+SELECT COUNT(total_sales), client_id
+FROM works_with
+GROUP BY client_id;
+```
