@@ -343,3 +343,169 @@ INSERT INTO student(name, major) VALUES('Mike', 'Computer Science');
 
 > you'll see auto-increment of student-id
 ```
+# Update & Delete
+
+## UPDATE
+
+- Suppose we have to set same major i.e. '**bio**' to all students :
+
+```sql
+SELECT * FROM student;
+
+UPDATE student
+SET major = 'Bio';
+```
+
+- Suppose we have to set major i.e. '**bio**' where major is 'biology':
+
+```sql
+SELECT * FROM student;
+
+UPDATE student
+SET major = 'Bio'
+WHERE major = 'biology';
+
+-- OR
+
+UPDATE student
+SET major = 'Comp Sci.'
+WHERE major = 'Computer Science';
+```
+- SQL Comparison Operators
+
+![cature3](https://user-images.githubusercontent.com/67586773/154854564-c940b6db-551a-4a5d-b859-883c7717a121.PNG)
+
+- Updating at specific row :
+
+```sql
+SELECT * FROM student;
+
+UPDATE student
+SET major = 'Bio'
+WHERE student_id = 4;
+```
+
+- Suppose we have to set major to 'Biochemistry' where major is 'bio' or 'chemistry'
+
+```sql
+SELECT * FROM student;
+
+UPDATE student
+SET major = 'Bio'
+WHERE major = 'biology';
+
+-- OR
+
+UPDATE student
+SET major = 'Comp Sci.'
+WHERE major = 'Computer Science';
+```
+- SQL Comparison Operators
+
+![capture13](https://user-images.githubusercontent.com/67586773/155184334-0a5ba304-40ac-4a9b-b8d1-9525bde025f5.png)
+
+- Updating at specific row :
+
+```sql
+SELECT * FROM student;
+
+UPDATE student
+SET major = 'Bio'
+WHERE student_id = 4;
+```
+
+- Suppose we have to set major to 'Biochemistry' where major is 'bio' or 'chemistry'
+
+```sql
+SELECT * FROM student;
+
+UPDATE student
+SET major = 'Biochemistry'
+WHERE major = 'bio' OR major = 'chemistry';
+```
+
+- **SQL Logical Operators**
+
+![captur15](https://user-images.githubusercontent.com/67586773/155760129-4a03f18b-7c12-4201-9127-5ed721010ae1.png)
+
+- Suppose we have to change both name and major to name = 'Tom' and major = 'undecided' at student_id = 1 :
+
+```sql
+SELECT * FROM student;
+
+UPDATE student
+SET name = 'Tom', major = 'undecided'
+WHERE student_id = 1;
+```
+## DELETE
+
+- **Delete all the rows:**
+
+```sql
+SELECT * FROM student;
+
+DELETE FROM student;
+```
+- Delete specific row:
+
+```sql
+SELECT * FROM student;
+
+DELETE FROM student
+WHERE student_id = 5;
+```
+1. Suppose we have to delete specifically:
+
+```sql
+SELECT * FROM student;
+
+DELETE FROM student
+WHERE name = 'Tom' AND major = 'undecided'
+```
+2. Suppose you want to grab name and major both from table:
+
+SELECT name, major
+FROM student;
+
+-- OR (If we have many tables then,)
+```sql
+SELECT student.name, student.major
+FROM student;
+```
+3. Suppose you want to grab name and major both from table and order by **alphabetically**(name):
+
+```sql
+SELECT student.name, student.major
+FROM student
+ORDER BY name;
+```
+4. Suppose you want to grab all information from table in descending or ascending order of student_id:
+
+```sql
+-- DESCENDING ORDER
+
+SELECT *
+FROM student
+ORDER BY student_id DESC;
+
+-- ASCENDING ORDER
+
+SELECT *
+FROM student
+ORDER BY student_id ASC;
+```
+
+5. Suppose you want to grab all information from table in alphabetical order of major and student_id:
+
+```sql
+SELECT *
+FROM student
+ORDER BY major, student_id;
+```
+5.1. Suppose you want to grab all information from table in alphabetical order of major and student_id (in descending order):
+
+```sql
+SELECT *
+FROM student
+ORDER BY major, student_id DESC;
+```
