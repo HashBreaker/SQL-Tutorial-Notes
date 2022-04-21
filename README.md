@@ -509,3 +509,66 @@ SELECT *
 FROM student
 ORDER BY major, student_id DESC;
 ```
+### LIMIT
+
+- If you want to get limited number of rows then you can use **LIMIT** keyword.
+6. Suppose you want to grab all information till 2 rows:
+
+```sql
+SELECT *
+FROM student
+LIMIT 2;
+```
+
+ 6.1. Suppose you want to grab all information till 2 rows and also by descending order of student_id:
+ 
+ ```sql
+SELECT *
+FROM student
+ORDER BY student_id DESC
+LIMIT 2;
+ ```
+ 
+ 7. Suppose you want to grab name and major from table where major = 'Chemistry' OR major='Biology':
+
+```sql
+SELECT name, major
+FROM student
+WHERE major = 'Chemistry' OR major = 'Biology';
+```
+8. Suppose you want to grab all information where major is not equal (<>) to 'Chemistry':
+
+```sql
+SELECT name, major
+FROM student
+WHERE major <> 'Chemistry';
+```
+9. Suppose you want to grab all information where student_id is less than (<) 3:
+
+```sql
+SELECT *
+FROM student
+WHERE student_id < 3;
+```
+10. Suppose you want to grab all information where student_id is less than (<) 3 and name is not equal (<>) to 'Jack':
+
+```sql
+SELECT *
+FROM student
+WHERE student_id < 3 AND name <> 'Jack';
+```
+11. Suppose you want to grab all information where names are equal to Claire, Kate & Mike:
+
+```sql
+SELECT *
+FROM student
+WHERE name IN ('Claire','Kate','Mike');
+```
+
+12. Suppose you want to grab all information where majors are equal to Biology & Chemistry and student_id > 2:
+
+```sql
+SELECT *
+FROM student
+WHERE major IN ('Biology', 'Chemistry') AND student_id > 2;
+```
