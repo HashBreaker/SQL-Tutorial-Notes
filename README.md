@@ -128,3 +128,218 @@ All tables in Relational Databases we have 2 things Rows & Columns
  - Eg, emp_id 101 (i.e. Michael Scott) sold paper(suppose) to client_id 401 (i.e. Lackawana Country) in branch_id 2 (i.e. Scranton Branch) worth $2,67,000 .
 
 ![Capture12 PNG](https://user-images.githubusercontent.com/67586773/142803752-3de1e605-b90e-43a4-b7c6-3e7352fd9c80.png)
+
+
+# What is SQL ?
+### SQL or Structured Query Language is a standard language for relational database management system.
+ - You can use SQL to get the RDBMS to do things for you
+    - Create, retrieve/read, update & delete data
+    - Create & manage databases
+    - Design & create database tables
+    - Perform administration tasks(security, user management, import/export, etc.
+    
+ - SQL implementations vary between systems
+     - Not all RDBMS' follow the SQL standard to a 'T'
+     - The concepts are the same but the implementation may vary
+    
+ - SQL is usually a hybrid language, it's basically 4 types of language in one
+ 
+     1. Data Query Language (DQL)
+         - Used to query the database for information.
+         - Get information that is already stored there
+
+     2. Data Definition Language (DDL)
+         - Used for defining databases schemas.
+
+     3. Data Control Language (DCL)
+         - Used for controlling access to the data in the database.
+         - User & permission management
+
+     4. Data Manipulation Language (DML)
+         - Used for inserting, updating and deleting data from the database.
+     
+   ### Queries
+
+  - A query is a set of instructions given to the RDBMS (written is SQL) that tell the RDBMS what information you want it to retrieve for you
+    - Tons of data in a DB
+    - Often hidden i a complex schema
+    - Goal is to only get the data you need
+    - And any Query in SQL ends with ;
+    
+    
+    ```sql
+     SELECT employee.name, employee.age
+     FROM employee
+     WHERE employee.salary > 300000;
+     ```
+
+  ### **Installation**
+
+- Install MySQL community server OR Xampp Server
+- Install PopSQL visualizing queries.
+
+ ## Datatypes (CORE)
+
+1. INT             - Whole Numbers
+2. DECIMAL(M,N)    - Decimal Numbers - Exact value  Eg., DECIMAL(10,4) 
+3. VARCHAR(100)      - String of text of length 100 here.
+4. BLOB            - Binary Large Object, Stores large data
+5. DATE            - 'YYYY-MM-DD'
+6. TIMESTAMP       - 'YYYY-MM-DD HH:MM:SS' - used for recording.
+
+ ### Creating Database
+
+- You can either create database using MySQL Community Server CLI
+    - Syntax: create database databaseName;
+    
+ ![Capture13 PNG](https://user-images.githubusercontent.com/67586773/147811977-30e5ba9a-1109-414c-8cb6-952c234eb9e4.png)
+    
+- or using phpmyadmin panel.
+     
+### Creating table
+
+![Capture14 PNG](https://user-images.githubusercontent.com/67586773/147812006-6d33cec0-1cbb-4c22-8421-862d4778ee6d.png)
+
+```sql
+CREATE TABLE student(
+
+student_id INT PRIMARY KEY,
+
+names VARCHAR(20),
+
+major VARCHAR(20)
+
+-- PRIMARY KEY(student_id)  // comment in SQL
+
+);
+```
+
+### Describing The Table
+
+- Syntax: DESCRIBE tableName;
+    
+    ```sql
+     DESCRIBE student;
+    ```
+    
+
+### Delete The Table
+
+- Syntax: DROP Table tableName;
+    
+    ```sql
+    DROP TABLE student;
+    ```   
+## SELECT Statement:
+
+- Grab all the information from the table.
+- Syntax: SELECT * FROM table_name;
+    
+    ```sql
+    SELECT * FROM student;
+    ```
+    
+
+### ALTER The Table
+
+- Syntax: ALTER Table tableName ADD column_name datatype( );    (Suppose we want to add cgpa column)
+    
+    ```sql
+    ALTER TABLE student ADD cgpa DECIMAL(3,2);
+    ```
+    
+    - OR you can also drop table
+    
+    ```sql
+    ALTER TABLE student DROP COLUMN cgpa;
+    ```
+    
+# Inserting Data
+
+- Syntax: INSERT INTO tab_name VALUES();
+    
+    
+    ```sql
+    INSERT INTO student VALUES(1, 'Jack', 'Biology');
+    INSERT INTO student VALUES(2, 'Kate', 'Sociology');
+    ```
+    
+
+>Rows affected 1 (You'll see this message after inserting above information) 
+
+### *You can specify what you want to insert specifically into the table. See below example,*
+
+- Suppose a student don't have major then we can  modify our INSERT Statement as follow:
+    
+    ```sql
+    INSERT INTO student(student_id, name) VALUES(3, 'Claire');
+    ```
+    
+
+>Now If we see the Claire's major, then it'll show **NULL**
+    
+ # Constraints
+
+- SQL constraints are used to specify rules for the data in a table. Constraints are used to limit the type of data that can go into a table.
+- NOT NULL,  UNIQUE
+
+```sql
+CREATE TABLE student(
+
+student_id INT,
+names VARCHAR(20) NOT NULL,  -- i.e. you cannot insert for **name** column
+major VARCHAR(20) UNIQUE,  -- i.e. major coloumn must be unique for each row in this table
+PRIMARY KEY(student_id)  // comment in SQL
+
+);
+
+SELECT * FROM student;
+
+INSERT INTO student VALUES(1, 'Jack', 'Biology');
+INSERT INTO student VALUES(2, 'Kate', 'Sociology');
+INSERT INTO student VALUES(3, NULL, 'Chemistry');   -- it'll throw error as we've mentioned that name van't be NULL
+INSERT INTO student VALUES(4, 'Jack', 'Biology');  -- it'll throw error - **Duplicate entry 'Biology' for key 'major'** as we've mentioned major column must be Unique for each row
+INSERT INTO student VALUES(5, 'Mike', 'Computer Science');
+```
+
+- DEFAULT
+
+```sql
+CREATE TABLE student(
+
+student_id INT,
+names VARCHAR(20) ,
+major VARCHAR(20) DEFAULT 'undecided', 
+PRIMARY KEY(student_id) 
+
+);
+
+SELECT * FROM student;
+
+INSERT INTO student(student_id, name) VALUES(1, 'Jack');   -- i.e now if you'll see Jack's major for student_id:1, it'll show **undecided**
+INSERT INTO student VALUES(2, 'Kate', 'Sociology');
+INSERT INTO student VALUES(3, 'Claire', 'Chemistry');   
+INSERT INTO student VALUES(4, 'Jack', 'Biology');
+INSERT INTO student VALUES(5, 'Mike', 'Computer Science');
+```
+- AUTO_INCREMENT (increment primary key automatically in this case student_id)
+
+```sql
+CREATE TABLE student(
+
+student_id INT,
+names VARCHAR(20) AUTO_INCREMENT,  
+major VARCHAR(20), 
+PRIMARY KEY(student_id) 
+
+);
+
+SELECT * FROM student;
+
+INSERT INTO student(name, major) VALUES('Jack', 'Biology');   
+INSERT INTO student(name, major) VALUES('Claire', 'Chemistry');   
+INSERT INTO student(name, major) VALUES('Jack', 'Biology');
+INSERT INTO student(name, major) VALUES('Mike', 'Computer Science');
+
+> you'll see auto-increment of student-id
+```
