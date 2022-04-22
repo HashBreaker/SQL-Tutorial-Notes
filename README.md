@@ -767,3 +767,183 @@ Select * from works_with;
 -- Branch Supplier table
 Select * from branch_supplier; 
 ```
+###  More Basic Queries 
+
+```sql
+-- Find all employees
+
+SELECT * FROM EMPLOYEE;
+
+-- Find all clients
+
+SELECT * FROM client;
+```
+
+-- Find all employees order by salary
+
+```sql
+SELECT * 
+FROM employee
+ORDER BY salary;
+
+
+-- Find all employees order by salary in descending order
+
+SELECT * 
+FROM employee
+ORDER BY salary desc;
+```
+
+```SQL
+-- Find all employee ordered by sex then name
+
+SELECT *
+FROM employee
+ORDER BY sex, first_name, last_name;
+```
+
+```sql
+-- Find first 5 employee in the table
+
+SELECT * 
+FROM employee 
+LIMIT 5;
+```
+
+```sql
+--- Find the first and last names of all employees
+
+SELECT first_name, last_name 
+FROM employee;
+
+--- Find the forename and surnames of all employees
+
+SELECT first_name AS forename, last_name AS surname
+FROM employee;
+```
+
+```sql
+-- Find out all different genders
+
+SELECT DISTINCT sex
+FROM employee;
+
+-- Find out all different branches
+
+SELECT DISTINCT branch_id
+FROM employee;
+```
+### Function
+
+* COUNT
+
+```sql
+-- Find the number of employee
+
+SELECT COUNT(emp_id) 
+FROM employee;     // output as 9 (It also counts null)
+
+// or
+SELECT COUNT(super_id)
+FROM empoyee;      // output as 8 (It won't count null)
+```
+
+```sql
+-- Find the number of female employees born after 1970
+
+SELECT COUNT(emp_id)
+FROM employee
+WHERE sex = 'F' AND birth_date > '1971-01-01';
+```
+
+* AVG
+
+```sql
+-- Find the average of all employee's salary
+
+SELECT AVG(salary)
+FROM employee;
+
+-- Find the average of Male's salary
+
+SELECT AVG(salary)
+FROM employee
+WHERE sex = 'M';
+
+-- Find the sum of all employee's salary
+
+SELECT SUM(salary)
+FROM employee;
+```
+
+* Aggregation (GROUP BY)
+
+```sql
+-- Find out how many males and females there are
+
+	SELECT COUNT(sex), sex
+	FROM employee
+	GROUP BY sex;
+```
+
+```sql
+-- Find the total sales of each salesman
+
+SELECT SUM(total_sales), emp_id
+FROM works_with
+GROUP BY emp_id;
+
+
+-- Find the total money spent by each client
+
+SELECT COUNT(total_sales), client_id
+FROM works_with
+GROUP BY client_id;
+```
+### Wildcards
+- - A wildcard character is used to substitute one or more characters in a string.
+- Wildcard characters are used with the `LIKE` operator is used in a `WHERE` clause to search for a specified pattern in a column.
+
+
+```sql
+-- % = any # characters,
+-- _ = one character
+```
+
+```sql
+-- Find any cleint's who are an LLC
+SELECT *
+FROM client
+WHERE client_name LIKE '%LLC';
+```
+
+```sql
+-- Find any branch suppliers who are in the label busines
+
+SELECT *
+FROM branch_supplier
+WHERE supplier_name LIKE '% Label%;
+```
+
+```sql
+-- Find any employee born in october
+
+SELECT * 
+FROM employee
+WHERE birth_date LIKE '____-10'; // YEAR-10
+
+-- Find any employee born in october
+
+SELECT *
+FROM employee
+WHERE birth_date LIKE '____-02';
+```
+
+```sql
+
+--- Find any clients who are schools :
+
+SELECT *
+FROM employee
+WHERE client_name LIKE '%school%';
+```
